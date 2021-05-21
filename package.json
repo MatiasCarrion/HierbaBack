@@ -1,0 +1,27 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatiasCarrion/HierbaBack.git"
+  },
+  "keywords": [],
+  "author": "Matías Carrión",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatiasCarrion/HierbaBack/issues"
+  },
+  "homepage": "https://github.com/MatiasCarrion/HierbaBack#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1"
+  }
+}
