@@ -31,8 +31,13 @@ router.post('/signin', async (req, res) => {
         else {
             if (rows.length === 0) return res.status(404).send('Usuario inexistente');
 
+            if (rows[0].pass === clave){
             const token = jwt.sign({_id: rows[0].idUsuario}, 'palabrasecreta');
             res.status(200).send({token});
+        }
+        else {
+            res.status(404).send('Clave incorrecta')
+        }
         }
     });
 

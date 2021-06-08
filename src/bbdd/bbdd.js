@@ -7,6 +7,16 @@ password: 'root',
 database: 'HierbaBuena'
 });
 
+conexion.on('error', function(err) {
+  console.log("[mysql error]",err);
+});
+
+module.exports = conexion;
+
+
+ 
+// conexion.end();
+
 // conexion.connect(function(err) {
 //     if (err) {
 //       console.error('Error de conexión: ' + err.sqlMessage);
@@ -14,12 +24,3 @@ database: 'HierbaBuena'
 //     }
 //     console.log('Conexión en ID: ' + connection.threadId);
 //   });
-
-conexion.on('error', function(err) {
-  console.log("[mysql error]",err);
-});
-
- 
-// conexion.end();
-
-module.exports = conexion;
