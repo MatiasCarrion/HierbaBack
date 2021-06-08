@@ -12,6 +12,8 @@ class Stock {
     }
   }
 
+  //ruta de productos
+
 router.get('', (req, res) => {
 
     let qry = 'SELECT prod.idProducto id, prod.nombre nombre, cat.nombre categoria, prod.stock from producto prod left join categoria cat on (cat.idCategoria = prod.categoriaId)';
