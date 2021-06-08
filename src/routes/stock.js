@@ -12,7 +12,7 @@ class Stock {
     }
   }
 
-  //ruta de productos
+  //ruta de
 
 router.get('', (req, res) => {
 
