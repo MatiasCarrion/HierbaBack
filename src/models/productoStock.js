@@ -1,4 +1,4 @@
-class Prod {
+class ProductoStock {
 
     constructor(id, nombre, categoria, stock, precioCompra, precioVenta) {
       this.id = id;
@@ -10,4 +10,4 @@ class Prod {
     }
   }
 
-exports.Prod;
+module.exports.ProductoStock = ProductoStock;

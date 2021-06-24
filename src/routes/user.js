@@ -2,6 +2,7 @@ const express = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
 const router = express.Router();
 const conexion = require('../bbdd/bbdd');
+const Usuario = require('../models/usuario');
 
 
 //token
@@ -60,5 +61,23 @@ function verificarToken(req, res, next) {
     next();
 }
 
+router.get('/:user', (req, res) => 
+{
+
+    const query = "select idUsuario id, nombre, pass from usuario where nombre = '" + req.params.user +"'";
+
+    conexion.query(query, function (error, rows, fields) {
+
+        if (error) {
+            throw new Error('Error en ejecución de query datos usuario.');
+        }
+        else {
+            user = new Usuario.Usuario(rows[0].id, rows[0].nombre, rows[0].pass);
+            res.status(200).send(user);
+        }
+
+    })
+
+})
 
 module.exports = router;
