@@ -8,7 +8,7 @@ const accion = require('../models/accion');
 
 // para traer todo el listado de productos
 router.get('/', async (req, res) => {
-
+console.log(conexion)
     const qry = 'SELECT prod.idProducto id, prod.nombre nombre, \
     cat.nombre categoria, prod.stock, prod.precioCompra, prod.precioVenta \
     from producto prod \
@@ -54,6 +54,27 @@ router.post('/alterStock', async (req, res) => {
         }
     });
 
+})
+
+// para cambiar el stock de un producto por venta
+router.post('/updStockVenta', async (req, res) => {
+    for (let unItem of req.body) {
+        let id = unItem._id;
+        let cantidad = unItem._stockMaximo - unItem._stock;
+
+        let qry = 'UPDATE producto set stock = ' + cantidad + " where idProducto = " + id;
+
+        // generamos el update
+        await conexion.query(qry, function (error, rows, fields) {
+            if (error) {
+                throw new Error('Error en ejecución de query update stock.');
+            }
+            else {
+                console.log('Stock modificado.');
+            }
+        });
+    }
+    res.status(200).send("OK");
 })
 
 // para obtener listado de categorias
@@ -104,12 +125,12 @@ router.post('/nuevoProducto', async (req, res) => {
 
     const query = 'INSERT INTO producto(`nombre`, `categoriaId`,`proveedorId`,\
     `precioCompra`,`minGanancia`,`maxGanancia`,`precioVenta`,`stock`)\
-    VALUES("'+producto._nombre+'",'+producto._categoriaId+","+producto._proveedorId+",\
-    "+producto._precioCompra+","+producto._minGanancia+",\
-    "+producto._maxGanancia+","+producto._precioVenta+","+producto._stock+")";
+    VALUES("'+ producto._nombre + '",' + producto._categoriaId + "," + producto._proveedorId + ",\
+    "+ producto._precioCompra + "," + producto._minGanancia + ",\
+    "+ producto._maxGanancia + "," + producto._precioVenta + "," + producto._stock + ")";
 
 
-    
+
     conexion.query(query, (error, rows, fields) => {
 
         if (error) {
@@ -136,7 +157,7 @@ router.get('/:id', async (req, res) => {
             throw new Error('Error en ejecución de query consulta un prod.');
         }
         else {
-            prod = new producto.Producto(rows[0].idProducto,rows[0].nombre,rows[0].categoriaId,rows[0].proveedorId,rows[0].precioCompra,rows[0].minGanancia,rows[0].maxGanancia,rows[0].precioVenta,rows[0].stock);
+            prod = new producto.Producto(rows[0].idProducto, rows[0].nombre, rows[0].categoriaId, rows[0].proveedorId, rows[0].precioCompra, rows[0].minGanancia, rows[0].maxGanancia, rows[0].precioVenta, rows[0].stock);
             res.status(200).send(prod);
         }
 
@@ -151,8 +172,8 @@ router.post('/logProducto', (req, res) => {
     const log = req.body;
     const query = "INSERT INTO producto_log(`categoriaId`,`proveedorId`,`precioCompra`,\
     `minGan`,`maxGan`,`precioVenta`,`existencia`,`stock`,`accionId`,`usuarioId`,`creadoEl`,`productoId`)\
-    VALUES("+log._categoriaId+','+log._proveedorId+','+log._precioCompra+",'"+log._minGanancia+"','"+log._maxGanancia+"',"+
-    log._precioVenta+','+log._existencia+','+log._stock+','+log._accionId+','+log._usuarioId+',NOW(), '+log._productoId+')';
+    VALUES("+ log._categoriaId + ',' + log._proveedorId + ',' + log._precioCompra + ",'" + log._minGanancia + "','" + log._maxGanancia + "'," +
+        log._precioVenta + ',' + log._existencia + ',' + log._stock + ',' + log._accionId + ',' + log._usuarioId + ',NOW(), ' + log._productoId + ')';
 
     conexion.query(query, function (error, rows, fields) {
 

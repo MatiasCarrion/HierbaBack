@@ -20,7 +20,8 @@ app.use(bodyParser.json())
 // configuramos las rutas
 app.use('/api/stock', require('./routes/stock'));
 app.use('/api/user', require('./routes/user'));
-
+app.use('/api/ubicaciones', require('./routes/ubicaciones'));
+app.use('/api/ventas', require('./routes/ventas'));
 
 // iniciamos express
 app.listen(port, (error) => {
