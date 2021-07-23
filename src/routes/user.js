@@ -28,6 +28,7 @@ router.post('/signin', async (req, res) => {
     await conexion.query(qry, function (error, rows, fields) {
         if (error) {
             throw new Error('Error en ejecución de query consulta stock.');
+            // console.log(error)
         }
         else {
             if (rows.length === 0) return res.status(404).send('Usuario inexistente');
