@@ -22,7 +22,9 @@ router.post('/signin', async (req, res) => {
     const usuario = req.body.usuario;
     const clave = req.body.clave;
 
-    const qry = 'SELECT idUsuario,pass from usuario where nombre = "' + usuario + '"';
+    // const qry = 'SELECT idUsuario,pass from usuario where nombre = "' + usuario + '"';
+    const qry = 'SELECT idUsuario,pass from usuario where nombre = mcarrion';
+
 
     // consultamos si existe el usuario
     await conexion.query(qry, function (error, rows, fields) {
