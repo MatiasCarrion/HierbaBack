@@ -11,20 +11,18 @@ const jwt = require('jsonwebtoken');
 class User {
 
     constructor(id, nombre, pass) {
-        this.id = id;
-        this.nombre = nombre;
-        this.pass = pass;
+      this.id = id;
+      this.nombre = nombre;
+      this.pass = pass;
     }
-}
+  }
 
 router.post('/signin', async (req, res) => {
 
     const usuario = req.body.usuario;
     const clave = req.body.clave;
 
-    // const qry = 'SELECT idUsuario,pass from usuario where nombre = "' + usuario + '"';
-    const qry = 'SELECT idUsuario,pass from usuario where nombre = "mcarrion"';
-
+    const qry = 'SELECT idUsuario,pass from usuario where nombre = "' + usuario + '"';
 
     // consultamos si existe el usuario
     await conexion.query(qry, function (error, rows, fields) {
@@ -33,15 +31,15 @@ router.post('/signin', async (req, res) => {
             // console.log(error)
         }
         else {
-            // if (rows.length === 0) return res.status(404).send('Usuario inexistente');
-            if (rows.length === 0) return res.send(rows);
-            if (rows[0].pass === 'mcarrion') {
-                const token = jwt.sign({ _id: rows[0].idUsuario }, 'palabrasecreta');
-                res.status(200).send({ token });
-            }
-            else {
-                res.status(404).send(rows)
-            }
+            if (rows.length === 0) return res.status(404).send('Usuario inexistente');
+
+            if (rows[0].pass === clave){
+            const token = jwt.sign({_id: rows[0].idUsuario}, 'palabrasecreta');
+            res.status(200).send({token});
+        }
+        else {
+            res.status(404).send('Clave incorrecta')
+        }
         }
     });
 
@@ -52,7 +50,7 @@ function verificarToken(req, res, next) {
     if (!req.headers.autorization) {
         return res.status(404).send('No autorizado');
     }
-
+    
     const token = req.headers.autorization.split(' ')[1];
 
     if (token === 'null') {
@@ -64,9 +62,10 @@ function verificarToken(req, res, next) {
     next();
 }
 
-router.get('/:user', (req, res) => {
+router.get('/:user', (req, res) => 
+{
 
-    const query = "select idUsuario id, nombre, pass from usuario where nombre = '" + req.params.user + "'";
+    const query = "select idUsuario id, nombre, pass from usuario where nombre = '" + req.params.user +"'";
 
     conexion.query(query, function (error, rows, fields) {
 
