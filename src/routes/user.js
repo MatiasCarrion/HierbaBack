@@ -18,7 +18,6 @@ class User {
   }
 
 router.post('/signin', async (req, res) => {
-
     const usuario = req.body.usuario;
     const clave = req.body.clave;
 
@@ -31,7 +30,7 @@ router.post('/signin', async (req, res) => {
             // console.log(error)
         }
         else {
-            if (rows.length === 0) return res.status(404).send('Usuario inexistente');
+            if (rows.length === 0) return res.status(404).send(req.body);
 
             if (rows[0].pass === clave){
             const token = jwt.sign({_id: rows[0].idUsuario}, 'palabrasecreta');
