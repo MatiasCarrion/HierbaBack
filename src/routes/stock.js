@@ -62,7 +62,7 @@ router.post('/updStockVenta', async (req, res) => {
         let id = unItem._id;
         let cantidad = unItem._stockMaximo - unItem._stock;
 
-        let qry = 'UPDATE producto set stock = ' + cantidad + " precioVenta = " + unItem._precioVenta + " where idProducto = " + id;
+        let qry = 'UPDATE producto set stock = ' + cantidad + ", precioVenta = " + unItem._precioVenta + " where idProducto = " + id;
 
         // generamos el update
         await conexion.query(qry, function (error, rows, fields) {
