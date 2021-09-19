@@ -40,8 +40,9 @@ router.post('/alterStock', async (req, res) => {
 
     const id = req.body._id;
     const cantidad = req.body._stock;
+    const precioVenta = req.body._precioVenta;
 
-    const qry = 'UPDATE producto set stock = ' + cantidad + " where idProducto = " + id;
+    const qry = 'UPDATE producto set stock = ' + cantidad + ", precioVenta = " + precioVenta +" where idProducto = " + id;
 
     // generamos el update
     await conexion.query(qry, function (error, rows, fields) {
@@ -62,7 +63,7 @@ router.post('/updStockVenta', async (req, res) => {
         let id = unItem._id;
         let cantidad = unItem._stockMaximo - unItem._stock;
 
-        let qry = 'UPDATE producto set stock = ' + cantidad + ", precioVenta = " + unItem._precioVenta + " where idProducto = " + id;
+        let qry = 'UPDATE producto set stock = ' + cantidad + " where idProducto = " + id;
 
         // generamos el update
         await conexion.query(qry, function (error, rows, fields) {
