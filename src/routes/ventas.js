@@ -13,7 +13,7 @@ router.get('/getMaxIdDetalleVenta', async (req, res) => {
             throw new Error('Error en ejecución de query id max detalle venta.');
         }
         else {
-            id = rows[0].id;
+            rows[0].id = null ? id = 0: id = rows[0].id;
             console.log("Consulta exitosa, max id " + id);
             res.status(200).send(id.toString());
         }
@@ -32,7 +32,7 @@ router.get('/getMaxIdDatosEnvio', async (req, res) => {
             throw new Error('Error en ejecución de query id max detalle venta.');
         }
         else {
-            id = rows[0].id;
+            rows[0].id = null ? id = 0: id = rows[0].id;
             console.log("Consulta exitosa, max id " + id);
             res.status(200).send(id.toString());
         }
