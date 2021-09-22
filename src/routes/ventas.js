@@ -130,8 +130,7 @@ router.post('/agregarEnvio', (req, res) => {
 
     const unEnvio = req.body;
     const query = "INSERT INTO datos_envio\
-    (`id`,\
-    `tipo_envio_id`,\
+    (`tipo_envio_id`,\
     `provincia_id`,\
     `localidad_id`,\
     `barrio`,\
@@ -141,7 +140,6 @@ router.post('/agregarEnvio', (req, res) => {
     `departamento`,\
     `observaciones`)\
     VALUES(" +
-        unEnvio.id + "," +
         unEnvio.tipo_envio_id + "," +
         unEnvio.provincia_id + "," +
         unEnvio.localidad_id + ",'" +
