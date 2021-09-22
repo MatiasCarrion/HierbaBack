@@ -152,7 +152,6 @@ router.post('/agregarEnvio', (req, res) => {
 
         +
         "')"
-
     try {
         conexion.query(query, function (error, rows, fields) {
             if (error) {
