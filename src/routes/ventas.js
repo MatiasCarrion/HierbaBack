@@ -53,6 +53,7 @@ router.post('/agregarVenta', (req, res) => {
 
     const unaVenta = req.body;
     const query = "INSERT INTO venta(\
+    `fecha`,\
     `detalle_venta_id`,\
     `detalle_envio_id`,\
     `monto_parcial`,\
@@ -64,7 +65,7 @@ router.post('/agregarVenta', (req, res) => {
     `telefono_cliente`,\
     `mail_cliente`)\
     VALUES\
-    (" +
+    ( NOW(), " +
         unaVenta.detalle_venta_id + "," +
         unaVenta.datos_envio_id + "," +
         unaVenta.monto_parcial + "," +
