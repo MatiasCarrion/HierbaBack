@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     try {
         conexion.query(qry, function (error, rows, fields) {
             if (error) {
-                throw new Error('Error en ejecución de query consulta stock...');
+                throw new Error('Error en ejecución de query consulta stock....');
             } else {
 
                 for (row of rows) {
