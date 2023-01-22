@@ -1,14 +1,15 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
+const config = require('./../config/index');
 
 if (process.env.NODE_ENV != 'production') {
   require('dotenv').config();
 }
 
 const conexion = mysql.createConnection({
-  host: process.env.HOST,
-  user: process.env.USUARIO,
-  password: process.env.PASS,
-  database: process.env.DBNAME
+  host: config.bbdd.host,
+  user: config.bbdd.user,
+  password:config.bbdd.password,
+  database: config.bbdd.dbname
   });
  
 
